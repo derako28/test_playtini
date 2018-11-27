@@ -1,0 +1,66 @@
+<section class="form_user">
+  <h2>Template Form User</h2>
+
+  <form class="form_user">
+    <div class="input-group">
+      <label for="firstName">First name</label>
+      <input
+        id="firstName"
+        name="firstName" type="text"
+        required minlength="3"
+        [(ngModel)]="user.firstName" #firstName="ngModel">
+    </div>
+
+    <div class="input-group">
+      <label for="surname">Last name</label>
+      <input
+        id="surname"
+        name="surname" type="text"
+        required minlength="3"
+        [(ngModel)]="user.lastName" #lastName="ngModel">
+    </div>
+
+    <div class="input-group">
+      <label for="phone">Phone</label>
+      <input
+        id="phone"
+        name="phone" type="text"
+        required pattern="\+380\d{3}\d{2}\d{2}\d{2}"
+        [(ngModel)]="user.phone" #phone="ngModel">
+    </div>
+
+    <div class="btn_wrap">
+      <button type="submit" (click)="onSubmit()" class="btn btn_submit">Submit</button>
+    </div>
+  </form>
+
+  <div class="form__errors">
+    <div class="errors__group" *ngIf="(firstName.dirty || firstName.touched) && firstName.errors">
+      <div *ngIf="firstName.errors.required">
+        First name is required
+      </div>
+      <div *ngIf="!firstName.errors.minLength && firstName.errors.minlength">
+        First name should be minimum {{firstName.errors.minlength.requiredLength}} charecters.
+      </div>
+    </div>
+
+    <div class="errors__group" *ngIf="(lastName.dirty || lastName.touched) && lastName.errors">
+      <div *ngIf="lastName.errors.required">
+        Last name is required
+      </div>
+      <div *ngIf="!lastName.errors.minLength && lastName.errors.minlength">
+        Last name should be minimum {{lastName.errors.minlength.requiredLength}} charecters.
+      </div>
+    </div>
+
+    <div class="errors__group" *ngIf="(phone.dirty || phone.touched) && phone.errors">
+      <div *ngIf="phone.errors.required">
+        Phone is required
+      </div>
+      <div *ngIf="phone.errors.pattern">
+        Phone not valid!
+      </div>
+    </div>
+  </div>
+
+</section>

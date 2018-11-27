@@ -1,0 +1,63 @@
+<section class="form_user">
+  <h2>Reactive Form User</h2>
+
+  <form [formGroup]="userForm" class="form_user">
+    <div class="input-group">
+      <label for="firstName">First name</label>
+      <input
+        id="firstName"
+        type="text"
+        formControlName="firstName">
+    </div>
+    <div class="input-group">
+      <label for="lastName">Last name</label>
+      <input
+        id="lastName"
+        type="text"
+        formControlName="lastName">
+    </div>
+    <div class="input-group">
+      <label for="phone">Phone</label>
+      <input
+        id="phone"
+        type="text"
+        formControlName="phone">
+    </div>
+
+    <div class="btn_wrap">
+      <button type="submit" (click)="onSubmit()" class="btn btn_submit">Submit</button>
+    </div>
+
+  </form>
+
+  <div class="form__errors">
+    <div class="errors__group" *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)">
+      <div *ngIf="firstName.errors.required">
+        First name is required
+      </div>
+      <div *ngIf="!firstName.errors.minLength && firstName.errors.minlength">
+        First name should be minimum {{firstName.errors.minlength.requiredLength}} charecters.
+      </div>
+    </div>
+
+    <div class="errors__group" *ngIf="(lastName.dirty || lastName.touched) && lastName.errors">
+      <div *ngIf="lastName.errors.required">
+        Last name is required
+      </div>
+      <div *ngIf="!lastName.errors.minLength && lastName.errors.minlength">
+        Last name should be minimum {{lastName.errors.minlength.requiredLength}} charecters.
+      </div>
+    </div>
+
+    <div class="errors__group" *ngIf="(phone.dirty || phone.touched) && phone.errors">
+      <div *ngIf="phone.errors.required">
+        Phone is required
+      </div>
+      <div *ngIf="phone.errors.pattern">
+        Phone not valid!
+      </div>
+    </div>
+  </div>
+
+
+</section>
